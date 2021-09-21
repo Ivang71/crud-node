@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 const uri = 'mongodb+srv://user0:awesomeTodos@cluster0.qjrp4.mongodb.net/todos-app?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
-export const db = {
+module.exports.db = {
   getTodos() {
     return new Promise((res) => {
       client.connect(async () => {
