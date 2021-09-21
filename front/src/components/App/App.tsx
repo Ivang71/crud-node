@@ -1,24 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Todo } from '../../Types/CommonTypes';
 import './App.css';
-
-const baseUrl = 'http://localhost:4000';
+import { todosApi } from '../../api/todos.api';
 
 export const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodoText, setNewTodoText] = useState<string>('');
 
-  const getTodos = () => fetch(`${baseUrl}/todos`).then(res => res.json()).then(data => setTodos(data));
-
   const addTodo = (text: string) => {
-    fetch(`${baseUrl}/todos`,
-      {
-        method: 'POST',
-        body: JSON.stringify({ text }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      }).then(res => res.json()).then(({ insertedId }) => setTodos([...todos, { _id: insertedId, text }]));
+    todosApi.add(text).then(res => {
+      const _id = res.data.insertedId;
+      setTodos([...todos, { _id, text }]);
+    });
   };
 
   const onAddTodoClick = (text: string) => {
@@ -27,7 +20,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    getTodos();
+    todosApi.get().then(res => setTodos(res.data))
   }, []);
   return (
     <main>
