@@ -1,9 +1,9 @@
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 const uri = 'mongodb+srv://user0:awesomeTodos@cluster0.qjrp4.mongodb.net/todos-app?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
-module.exports.db = {
+export const db = {
   getTodos() {
     return new Promise((res) => {
       client.connect(async () => {
@@ -14,8 +14,8 @@ module.exports.db = {
       });
     })
   },
-  
-  addTodo(text) {
+
+  addTodo(text: string) {
     return new Promise((res) => {
       client.connect(async () => {
         const collection = client.db('todos-app').collection('todos');
