@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Todo } from '../../Types/CommonTypes';
-import './App.css';
+import './App.scss';
 import { todosApi } from '../../api/todos.api';
 
 export const App = () => {
