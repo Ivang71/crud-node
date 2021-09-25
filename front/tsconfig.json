@@ -12,6 +12,7 @@
     "strict": true,
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
