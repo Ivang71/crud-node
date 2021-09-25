@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Todo } from '../../Types/CommonTypes';
 import './App.scss';
-import { todosApi } from '../../api/todos.api';
+import { todosApi } from '../../api/todosApi';
 
 export const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -22,6 +22,7 @@ export const App = () => {
   useEffect(() => {
     todosApi.get().then(res => setTodos(res.data))
   }, []);
+
   return (
     <main>
       <div>

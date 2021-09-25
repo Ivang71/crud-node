@@ -10,12 +10,16 @@ app.use(express.json());
 app.use(cors());
 app.use(urlencoded({ extended: false }));
 
-app.get('/todos', async (req: Request, res: Response) => {
+app.get('/todos', async (req, res) => {
   res.send(await db.getTodos());
 });
 
-app.post('/todos', async (req: Request, res: Response) => {
+app.post('/todos', async (req, res) => {
   res.json(await db.addTodo(req.body.text));
+});
+
+app.put('/todos', async (req, res) => {
+  res.send(await db.updateTodo(req.body._id, req.body.text));
 });
 
 const port = 4000;
