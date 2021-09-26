@@ -1,16 +1,18 @@
 import axios from 'axios';
-import { Todo } from '../Types/CommonTypes';
+import { PostResponse, Todo } from '../Types/CommonTypes'
 
 const api = axios.create({
   baseURL: "http://localhost:4000/"
 });
 
 export const todosApi = {
-  get() {
-    return api.get<Todo[]>('todos');
+  async get() {
+    const r = await api.get<Todo[]>('todos')
+    return r.data
   },
 
-  add(text: string) {
-    return api.post('todos', { text });
+  async add(text: string) {
+    const r = await api.post<PostResponse>('todos', { text })
+    return r.data
   }
 }
