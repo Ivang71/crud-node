@@ -1,32 +1,30 @@
 import express from 'express';
 import cors from 'cors';
 import { urlencoded } from 'body-parser';
-import { Request, Response } from 'express';
-import { db } from './db';
+import { MongoClient } from 'mongodb'
+import { routes } from './app/routes'
 
-const app = express();
+export const app = express()
 
 app.use(express.json());
 app.use(cors());
 app.use(urlencoded({ extended: false }));
 
-app.get('/todos', async (req, res) => {
-  res.send(await db.getTodos());
-});
+const serverPort = 4000
+const uri = 'mongodb+srv://user0:awesomeTodos@cluster0.qjrp4.mongodb.net/todos-app?retryWrites=true&w=majority'
+MongoClient.connect(uri, (err, database) => {
+  if (err) {
+    return console.error(err)
+  }
+  if (!database) {
+    return console.error('database is undefined')
+  }
+  const db = database.db('todos-app')
+  routes(app, db)
+  const server = app.listen(serverPort, () => console.log(`Server is listening at port ${serverPort}`))
 
-app.post('/todos', async (req, res) => {
-  res.json(await db.addTodo(req.body.text));
-});
-
-app.put('/todos', async (req, res) => {
-  res.send(await db.updateTodo(req.body._id, req.body.text));
-});
-
-const port = 4000;
-
-const server = app.listen(port, () => console.log(`Server is listening at port ${port}`));
-
-process.on('SIGINT', async () => {
-  await server.close(() => console.log('Server stopped'));
-  process.exit();
-});
+  process.on('SIGINT', async () => {
+    await server.close(() => console.log('Server stopped'))
+    process.exit()
+  });
+})

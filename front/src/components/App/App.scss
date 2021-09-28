@@ -1,6 +1,22 @@
 :root {
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  font-family: 'Roboto', Arial, sans-serif;
   @media (prefers-color-scheme: dark) {
-    color-scheme: light dark;
+    color-scheme: dark light;
   }
-  font-family: Arial, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  min-width: 100%;
+  min-height: 100%;
+  transition: color, background 500ms ease-in;
+}
+
+.todo-page {
+
+  .item {
+    display: flex;
+    align-items: center;
+  }
 }

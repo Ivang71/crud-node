@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      if (localStorage.theme) {
+        document.documentElement.style.background = localStorage.theme === 'dark' ? '#121212' : '#fff'
+      } else {
+        document.documentElement.style.background =
+          matchMedia('(prefers-color-scheme: dark)').matches ? '#121212' : '#fff'
+      }
+    </script>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,6 +16,6 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="app"></div>
   </body>
 </html>
