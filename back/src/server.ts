@@ -11,7 +11,7 @@ app.use(cors());
 app.use(urlencoded({ extended: false }));
 
 const serverPort = 4000
-const uri = 'mongodb+srv://user0:awesomeTodos@cluster0.qjrp4.mongodb.net/todos-app?retryWrites=true&w=majority'
+const uri = 'mongodb+srv://user0:awesomeTodos@cluster0.qjrp4.mongodb.net/todos-db?retryWrites=true&w=majority'
 MongoClient.connect(uri, (err, database) => {
   if (err) {
     return console.error(err)
@@ -19,7 +19,7 @@ MongoClient.connect(uri, (err, database) => {
   if (!database) {
     return console.error('database is undefined')
   }
-  const db = database.db('todos-app')
+  const db = database.db('todos-db')
   routes(app, db)
   const server = app.listen(serverPort, () => console.log(`Server is listening at port ${serverPort}`))
 
