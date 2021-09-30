@@ -3,16 +3,16 @@ import cors from 'cors';
 import { urlencoded } from 'body-parser';
 import { MongoClient } from 'mongodb'
 import { routes } from './app/routes'
+import dotenv from 'dotenv'
 
+dotenv.config()
 export const app = express()
 
 app.use(express.json());
 app.use(cors());
 app.use(urlencoded({ extended: false }));
 
-const serverPort = 4000
-const uri = 'mongodb+srv://user0:awesomeTodos@cluster0.qjrp4.mongodb.net/todos-db?retryWrites=true&w=majority'
-MongoClient.connect(uri, (err, database) => {
+MongoClient.connect(process.env.DB_URI as string, (err, database) => {
   if (err) {
     return console.error(err)
   }
@@ -21,7 +21,7 @@ MongoClient.connect(uri, (err, database) => {
   }
   const db = database.db('todos-db')
   routes(app, db)
-  const server = app.listen(serverPort, () => console.log(`Server is listening at port ${serverPort}`))
+  const server = app.listen(process.env.PORT, () => console.log(`Server is listening at port ${process.env.PORT}`))
 
   process.on('SIGINT', async () => {
     await server.close(() => console.log('Server stopped'))
