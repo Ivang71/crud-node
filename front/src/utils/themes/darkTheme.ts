@@ -3,6 +3,9 @@ import { indigo, teal } from '@mui/material/colors'
 
 export const darkTheme = createTheme({
   palette: {
+    action: {
+      hover: '#353535',
+    },
     mode: 'dark',
     primary: {
       light: teal[300],

@@ -4,8 +4,8 @@ import { darkTheme } from './darkTheme'
 import { lightTheme } from './lightTheme'
 
 export const useTheme = (): [Theme, () => void] => {
-  const prefersDark = useMediaQuery('(prefers-color-scheme: dark)')
-  const localTheme = localStorage.getItem('theme');
+  const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches
+  const localTheme = localStorage.getItem('theme')
   if (!localTheme) {
     localStorage.setItem('theme', prefersDark ? 'dark' : 'light')
   }

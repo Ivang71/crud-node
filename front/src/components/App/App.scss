@@ -8,6 +8,9 @@
   @media (prefers-color-scheme: dark) {
     color-scheme: dark light;
   }
+  *::selection {
+    background: #4db6ac;
+  }
 }
 
 html, body, #app {
@@ -17,9 +20,7 @@ html, body, #app {
   min-height: 100%;
 }
 
-.todo-page {
-  text-align: center;
+.background-wrapper {
   min-height: 100%;
-  padding: 8vh 8px 5vh;
-  transition: color, background-color 350ms;
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }

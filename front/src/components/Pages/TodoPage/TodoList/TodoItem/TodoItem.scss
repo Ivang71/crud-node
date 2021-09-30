@@ -1,0 +1,43 @@
+.item-container {
+  display: flex;
+  justify-content: center;
+
+  .item {
+    margin: 0 auto;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    word-break: break-word;
+    transition: filter 100ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.active, &:hover {
+      filter: contrast(80%);
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
+    @media screen and (min-width: 501px) {
+      width: 60%;
+    }
+
+    .delete-button {
+      transition: opacity 50ms;
+    }
+
+    [contenteditable] {
+      outline: 0 solid transparent;
+    }
+
+    [placeholder]:empty::before {
+      &::before {
+        content: "";
+        color: #979797;
+      }
+      &:focus:before {
+        content: attr(placeholder);
+      }
+    }
+  }
+}

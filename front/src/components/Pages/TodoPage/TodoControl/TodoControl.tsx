@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { observer } from 'mobx-react'
 import { Add } from '@mui/icons-material'
-import { Button, TextareaAutosize } from '@mui/material'
+import { Button, TextareaAutosize, TextField } from '@mui/material'
 import { todosStore } from '../../../../stores/todosStore'
 import './TodoControl.scss'
 
@@ -18,20 +18,20 @@ export const TodoControl = observer(() => {
 
   return (
     <div className="todo-control">
-      <TextareaAutosize
+      <TextField
         value={newTodoText}
         onChange={({ target: { value } }) => setNewTodoText(value)}
         onKeyDown={(e) => {
           e.key === 'Enter' && onAddTodoClick()
         }}
-        minRows={2}
         spellCheck={false}
+        className="input"
+        placeholder="Enter something..."
         color="primary"
       />
       <Button
         onClick={onAddTodoClick}
         variant="contained"
-        size="large"
         endIcon={<Add/>}
       >
         Add

@@ -1,8 +1,29 @@
-.menu-button {
+.drawer-container {
+  padding-top: 24px;
+  padding-bottom: 16px;
+  min-width: 30vw;
+  min-height: 100%;
+  display: flex !important;
+  flex-direction: column;
+
+  .item {
+    display: flex;
+    align-items: center;
+  }
+
+  .bottom {
+    margin-top: auto;
+  }
+
+  .toggle-theme-button {
+    margin-left: 8px;
+    max-width: 40px;
+  }
+}
+
+.open-menu-button {
   position: absolute !important;
   inset: 8px auto auto 8px;
 }
 
-.drawer-container {
 
-}

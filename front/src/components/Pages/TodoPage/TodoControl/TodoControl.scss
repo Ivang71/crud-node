@@ -5,10 +5,13 @@
   justify-content: center;
   gap: 8px;
 
-  textarea {
-    resize: none;
+  .input {
     min-width: 50%;
     font-size: 1rem;
+
+    ::placeholder {
+      user-select: none;
+    }
 
     @media screen and (min-width: 900px) {
       min-width: 30%;

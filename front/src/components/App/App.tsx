@@ -13,12 +13,16 @@ export const App = observer(() => {
     <>
       <CssBaseline/>
       <ThemeProvider theme={theme}>
-        <Drawer toggleTheme={toggleTheme}/>
+        <Drawer
+          theme={theme}
+          toggleTheme={toggleTheme}
+        />
         <div
           style={{
             color: theme.palette.text.primary,
             background: theme.palette.background.default,
           }}
+          className="background-wrapper"
         >
           <TodoPage/>
         </div>
