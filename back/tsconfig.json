@@ -9,7 +9,7 @@
     // "disableReferencedProjectLoad": true,             /* Reduce the number of projects loaded automatically by TypeScript. */
 
     /* Language and Environment */
-    "target": "es2020",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "esnext",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "lib": [
       "DOM",
       "ESNext"
@@ -97,13 +97,5 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true,                                /* Skip type checking all .d.ts files. */
-    "baseUrl": "src",
-    "paths": {
-      "utils/*": ["utils/*"],
-      "types/*": ["types/*"],
-      "stores/*": ["stores/*"],
-      "components/*": ["components/*"],
-      "api/*": ["api/*"]
-    }
   }
 }
