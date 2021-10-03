@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { observer } from 'mobx-react'
 import { Add } from '@mui/icons-material'
-import { Button, TextareaAutosize, TextField } from '@mui/material'
-import { todosStore } from '../../../../stores/todosStore'
+import { Button, TextField } from '@mui/material'
+import { observer } from 'mobx-react'
+import { useState } from 'react'
+import { todosStore } from 'stores/todosStore'
 import './TodoControl.scss'
 
 

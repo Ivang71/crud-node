@@ -1,10 +1,11 @@
+import { RefObject, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react'
 import classNames from 'classnames'
 import { DeleteOutline } from '@mui/icons-material'
-import { RefObject, useEffect, useRef, useState } from 'react'
 import { Container, IconButton, Input, InputProps, Paper, styled, Tooltip } from '@mui/material'
-import { UiTodo } from '../../../../../types/CommonTypes'
+import { todosStore } from 'stores/todosStore'
 import './TodoItem.scss'
+import { Todo } from 'types/CommonTypes'
 
 const onClickOutside = (
   ref: RefObject<any>,
@@ -30,7 +31,7 @@ const TodoInput = styled(Input)<InputProps>(({ theme }) => (
 ))
 
 interface TodoItemProps {
-  todo: UiTodo,
+  todo: Todo,
 }
 
 export const TodoItem = observer(({
@@ -84,6 +85,7 @@ export const TodoItem = observer(({
         />
         <Tooltip title="Delete">
           <IconButton
+            onClick={() => todosStore.delete(todo._id)}
             className="delete-button"
             style={{
               opacity: hover ? 1 : 0,

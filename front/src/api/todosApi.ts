@@ -1,9 +1,5 @@
-import axios from 'axios';
-import { PostResponse, Todo } from '../types/CommonTypes'
-
-const api = axios.create({
-  baseURL: "http://localhost:4000/"
-});
+import { api } from 'api/api'
+import { Todo } from 'types/CommonTypes'
 
 export const todosApi = {
   async get() {
@@ -11,18 +7,18 @@ export const todosApi = {
     return r.data
   },
 
-  async add(text: string) {
-    const r = await api.post<PostResponse>('todos', { text })
+  async post(text: string) {
+    const r = await api.post<Todo>('todos', { text })
     return r.data
   },
 
-  async change({ _id, text }: Todo) {
-    const r = await api.put('todos', { _id, text })
+  async put({ _id, text }: Todo) {
+    const r = await api.put(`todos/${_id}`, { text })
+    console.log('put data', r)
     return r.data
   },
 
-  async delete(_id: string) {
-    const r = await api.delete('todos', { data: _id })
-    return r.data
+  delete(_id: string) {
+    api.delete(`todos/${_id}`)
   },
 }

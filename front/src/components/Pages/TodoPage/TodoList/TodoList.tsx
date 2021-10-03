@@ -1,7 +1,7 @@
 import { Collapse, List } from '@mui/material'
 import { observer } from 'mobx-react'
 import { TransitionGroup } from 'react-transition-group'
-import { todosStore } from '../../../../stores/todosStore'
+import { todosStore } from 'stores/todosStore'
 import { TodoItem } from './TodoItem/TodoItem'
 import './TodoList.scss'
 

@@ -1,11 +1,11 @@
+import { todosApi } from 'api/todosApi'
 import { action, makeAutoObservable, runInAction, toJS } from 'mobx'
+import { Todo } from 'types/CommonTypes'
 import { v4 as uid } from 'uuid'
-import { todosApi } from '../api/todosApi'
-import { Todo, UiTodo } from '../types/CommonTypes'
 
 
 class TodosStore {
-  _todos: UiTodo[] = []
+  _todos: Todo[] = []
 
   get todos() {
     return toJS(this._todos)
@@ -18,36 +18,30 @@ class TodosStore {
 
   @action
   async load() {
-    const todos = (await todosApi.get()).map((t) =>( {...t, editable: false}))
+    const todos = await todosApi.get()
     runInAction(() => {
       this._todos = todos
     })
   }
 
+  @action
   async add(text: string) {
-    const tmpId = uid()
-    this._todos.push({ _id: tmpId, text, editable: false })
-    try {
-      const { insertedId } = await todosApi.add(text)
-      this._todos.forEach((todo) => {
-        if (todo._id === tmpId) {
-          todo._id = insertedId
-        }
-      })
-    } catch (err) {
-      this._todos = this._todos.filter(({ _id }) => _id !== tmpId)
-      console.error('erasdf', err)
-    }
+    const todo = await todosApi.post(text)
+    runInAction(() => {
+      this._todos.unshift(todo)
+    })
   }
 
+  @action
   async change(todo: Todo) {
-    const r = await todosApi.change(todo)
+    const r = await todosApi.put(todo)
     console.log('response', r)
   }
 
-  async delete(_id: string) {
-    const r = await todosApi.delete(_id)
-    // console.log('response', r)
+  @action
+  async delete(id: string) {
+    todosApi.delete(id)
+    runInAction(() => this._todos = this._todos.filter(({ _id }) => _id !== id))
   }
 }
 
