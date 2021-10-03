@@ -33,5 +33,6 @@ todosRouter.put('/:id', async (req, res) => {
 })
 
 todosRouter.delete('/:id', async (req, res) => {
-  Todo.findOneAndDelete({ id: req.body._id })
+  Todo.findOneAndDelete({ id: req.params.id })
+  res.sendStatus(200)
 })
