@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { KeyboardEvent, RefObject, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react'
 import classNames from 'classnames'
 import { DeleteOutline } from '@mui/icons-material'
@@ -44,43 +44,48 @@ export const TodoItem = observer(({
   const [text, setText] = useState<string>(todo.text)
 
   const save = () => {
-    console.log(todo.text, ' ', active)
-    if (active) {
-      setActive(false)
-      const o = {
+    if (text !== todo.text) {
+      todosStore.change({
         ...todo,
-        text: '',
-      }
+        text: text,
+      })
     }
+    setActive(false)
   }
 
-  const selectText = () => {
-    const range = new Range()
-    inputRef.current && range.selectNodeContents(inputRef.current)
-    document.getSelection()?.removeAllRanges()
-    document.getSelection()?.addRange(range)
+  const handleItemClick = () => {
+    inputRef.current?.focus()
+    setActive(true)
+  }
+
+  const onEnter = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      inputRef.current?.blur()
+    }
   }
 
   onClickOutside(itemRef, save)
 
   return (
-    <Container
-      className="item-container"
-    >
+    <Container className="item-container">
       <Paper
         ref={itemRef}
-        elevation={4}//textRef.current?.focus()
+        elevation={4}
         className={classNames('item', { active })}
-        onClick={() => setActive(true)}
+        onClick={handleItemClick}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
         <TodoInput
-          ref={inputRef}
-          // onFocus={selectText}
+          inputRef={inputRef}
+          onFocus={(e) => e.target.select()}
+          onBlur={save}
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={onEnter}
           spellCheck={false}
+          fullWidth
+          multiline
           placeholder="Todo"
         />
         <Tooltip title="Delete">

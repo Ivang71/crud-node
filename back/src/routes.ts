@@ -23,16 +23,19 @@ todosRouter.post('/', async (req, res) => {
 })
 
 todosRouter.put('/:id', async (req, res) => {
-  const newTodo = await Todo.findOneAndUpdate(
-    { _id: req.body._id },
+  await Todo.updateOne(
+    { _id: req.params.id },
     { text: req.body.text },
-    { new: true },
+    {},
+    (err) => res.sendStatus(err ? 500 : 200)
   )
-  console.log('insertedData', newTodo)
-  res.send(newTodo)
 })
 
 todosRouter.delete('/:id', async (req, res) => {
-  Todo.findOneAndDelete({ id: req.params.id })
+  await Todo.findOneAndDelete(
+    { id: req.params.id },
+    {},
+    (err) => res.sendStatus( err ? 500 : 200 )
+  )
   res.sendStatus(200)
 })
