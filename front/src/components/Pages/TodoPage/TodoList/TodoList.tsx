@@ -5,7 +5,6 @@ import { todosStore } from 'stores/todosStore'
 import { TodoItem } from './TodoItem/TodoItem'
 import './TodoList.scss'
 
-
 export const TodoList = observer(() => {
   console.log('%c todos', 'color: green', todosStore.todos)
   return (

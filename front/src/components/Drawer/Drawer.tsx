@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { observer } from 'mobx-react'
-import MenuIcon from '@mui/icons-material/Menu';
-import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import MenuIcon from '@mui/icons-material/Menu'
 import { Button, Container, IconButton, Link, SwipeableDrawer, Theme, Typography } from '@mui/material'
+import { observer } from 'mobx-react'
+import { useState } from 'react'
 import { darkTheme } from '../../utils/themes/darkTheme'
 import './Drawer.scss'
 

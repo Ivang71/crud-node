@@ -1,7 +1,8 @@
-import { Theme, useMediaQuery } from '@mui/material'
+import { Theme } from '@mui/material'
 import { useState } from 'react'
 import { darkTheme } from './darkTheme'
 import { lightTheme } from './lightTheme'
+
 
 export const useTheme = (): [Theme, () => void] => {
   const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches

@@ -1,6 +1,7 @@
 import { api } from 'api/api'
 import { Todo } from 'types/CommonTypes'
 
+
 export const todosApi = {
   async get() {
     const r = await api.get<Todo[]>('todos')

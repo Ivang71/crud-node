@@ -1,7 +1,6 @@
 import { todosApi } from 'api/todosApi'
 import { action, makeAutoObservable, runInAction, toJS } from 'mobx'
 import { Todo } from 'types/CommonTypes'
-import { v4 as uid } from 'uuid'
 
 
 class TodosStore {

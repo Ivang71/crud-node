@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { todosStore } from 'stores/todosStore'
 import './TodoControl.scss'
 
-
 export const TodoControl = observer(() => {
   const [newTodoText, setNewTodoText] = useState<string>('')
 

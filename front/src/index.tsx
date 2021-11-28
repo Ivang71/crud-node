@@ -21,9 +21,9 @@ const app = initializeApp(firebaseConfig)
 const analytics = getAnalytics(app)*/
 
 render(
-    <StrictMode>
-      <App/>
-    </StrictMode>,
-    document.querySelector('#app')
+  <StrictMode>
+    <App/>
+  </StrictMode>,
+  document.querySelector('#app'),
 )
 

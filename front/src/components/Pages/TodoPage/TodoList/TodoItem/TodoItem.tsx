@@ -1,11 +1,12 @@
-import { KeyboardEvent, RefObject, useEffect, useRef, useState } from 'react'
-import { observer } from 'mobx-react'
-import classNames from 'classnames'
 import { DeleteOutline } from '@mui/icons-material'
 import { Container, IconButton, Input, InputProps, Paper, styled, Tooltip } from '@mui/material'
+import classNames from 'classnames'
+import { observer } from 'mobx-react'
+import { KeyboardEvent, RefObject, useEffect, useRef, useState } from 'react'
 import { todosStore } from 'stores/todosStore'
-import './TodoItem.scss'
 import { Todo } from 'types/CommonTypes'
+import { isTouchscreen } from '../../../../../utils/commonUtils'
+import './TodoItem.scss'
 
 const onClickOutside = (
   ref: RefObject<any>,
@@ -93,7 +94,7 @@ export const TodoItem = observer(({
             onClick={() => todosStore.delete(todo._id)}
             className="delete-button"
             style={{
-              opacity: hover ? 1 : 0,
+              opacity: (isTouchscreen || hover) ? 1 : 0,
             }}
           >
             <DeleteOutline/>

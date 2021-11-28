@@ -1,7 +1,7 @@
-import { observer } from 'mobx-react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import { Drawer } from '../Drawer/Drawer'
+import { observer } from 'mobx-react'
 import { useTheme } from '../../utils/themes/useTheme'
+import { Drawer } from '../Drawer/Drawer'
 import { TodoPage } from '../Pages'
 import './App.scss'
 
