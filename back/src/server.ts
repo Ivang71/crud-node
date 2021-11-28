@@ -30,40 +30,6 @@ app.use((req, res, next) => {
 
 app.use('/todos', todosRouter)
 
-app.listen(process.env.PORT, () => {
+app.listen(Number(process.env.PORT), process.env.HOSTNAME || 'localhost', () => {
   console.log(`Server is running on port ${process.env.PORT}`)
 })
-
-
-
-/*
-import express from 'express'
-import cors from 'cors'
-import { urlencoded } from 'body-parser'
-import { connect } from 'mongoose'
-import dotenv from 'dotenv'
-
-dotenv.config()
-export const app = express()
-
-app.use(express.json())
-app.use(cors())
-app.use(urlencoded({ extended: false }))
-
-connect(process.env.DB_URI as string, {  }, (err) => {
-  if (err) {
-    return console.error(err)
-  }
-  if (!database) {
-    return console.error('database is undefined')
-  }
-  const db = database.db('todos-db')
-  routes(app, db)
-  const server = app.listen(process.env.PORT, () => console.log(`Server is listening at port ${process.env.PORT}`))
-
-  process.on('SIGINT', async () => {
-    await server.close(() => console.log('Server stopped'))
-    process.exit()
-  })
-})
-*/
