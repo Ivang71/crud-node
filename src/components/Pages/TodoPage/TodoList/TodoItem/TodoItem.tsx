@@ -46,10 +46,7 @@ export const TodoItem = observer(({
 
   const save = () => {
     if (text !== todo.text) {
-      todosStore.change({
-        ...todo,
-        text: text,
-      })
+      todosStore.change(todo.id, { text: text })
     }
     setActive(false)
   }
@@ -79,10 +76,10 @@ export const TodoItem = observer(({
       >
         <TodoInput
           inputRef={inputRef}
-          onFocus={(e) => e.target.select()}
+          onFocus={(e: any) => e.target.select()}
           onBlur={save}
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e: any) => setText(e.target.value)}
           onKeyDown={onEnter}
           spellCheck={false}
           fullWidth
@@ -91,7 +88,7 @@ export const TodoItem = observer(({
         />
         <Tooltip title="Delete">
           <IconButton
-            onClick={() => todosStore.delete(todo._id)}
+            onClick={() => todosStore.delete([todo.id])}
             className="delete-button"
             style={{
               opacity: (isTouchscreen || hover) ? 1 : 0,

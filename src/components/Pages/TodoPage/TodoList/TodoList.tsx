@@ -11,7 +11,7 @@ export const TodoList = observer(() => {
     <List>
       <TransitionGroup className="list">
         {todosStore.todos.map((todo) => (
-          <Collapse key={todo._id}>
+          <Collapse key={todo.id}>
             <TodoItem todo={todo}/>
           </Collapse>
         ))}

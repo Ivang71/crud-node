@@ -1,7 +1,11 @@
 export interface Todo {
-  _id: string
+  id: number
   text: string
-  createdAt: Date,
-  updatedAt: Date,
-  __v: number,
+  createdAt: Date
+  completed: boolean
+  position: number
 }
+
+export type TodoData = Omit<Todo, 'id' | 'createdAt'>
+
+export type TodoDto = Partial<TodoData>

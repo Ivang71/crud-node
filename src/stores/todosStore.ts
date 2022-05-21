@@ -1,6 +1,6 @@
 import { todosApi } from 'api/todosApi'
 import { action, makeAutoObservable, runInAction, toJS } from 'mobx'
-import { Todo } from 'types/CommonTypes'
+import { Todo, TodoData, TodoDto } from 'types/CommonTypes'
 
 
 class TodosStore {
@@ -24,23 +24,26 @@ class TodosStore {
   }
 
   @action
-  async add(text: string) {
-    const todo = await todosApi.post(text)
+  async add(text: Todo['text']) {
+    const todo = await todosApi.post({
+      text,
+      position: this._todos.length && this._todos.at(-1)!.position + 1,
+      completed: false
+    })
     runInAction(() => {
-      this._todos.unshift(todo)
+      this._todos.push(todo)
     })
   }
 
   @action
-  async change(todo: Todo) {
-    const r = await todosApi.put(todo)
-    console.log('response', r)
+  change(id: Todo['id'], todoDto: TodoDto) {
+    todosApi.put(id, todoDto)
   }
 
   @action
-  async delete(id: string) {
-    todosApi.delete(id)
-    runInAction(() => this._todos = this._todos.filter(({ _id }) => _id !== id))
+  delete(deleteIds: number[]) {
+    todosApi.delete(deleteIds)
+    runInAction(() => this._todos = this._todos.filter(({ id }) => !deleteIds.includes(id)))
   }
 }
 

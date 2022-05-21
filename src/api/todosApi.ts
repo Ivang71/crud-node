@@ -1,5 +1,5 @@
 import { api } from 'api/api'
-import { Todo } from 'types/CommonTypes'
+import { Todo, TodoData, TodoDto } from 'types/CommonTypes'
 
 
 export const todosApi = {
@@ -8,18 +8,16 @@ export const todosApi = {
     return r.data
   },
 
-  async post(text: string) {
-    const r = await api.post<Todo>('todos', { text })
+  async post({ text, position, completed }: TodoData) {
+    const r = await api.post<Todo>('todos', { text, position, completed })
     return r.data
   },
 
-  async put({ _id, text }: Todo) {
-    const r = await api.put(`todos/${_id}`, { text })
-    console.log('put data', r)
-    return r.data
+  put(id: Todo["id"], todoDto: TodoDto) {
+    api.put(`todos/${id}`, todoDto)
   },
 
-  delete(_id: string) {
-    api.delete(`todos/${_id}`)
+  delete(ids: number[]) {
+    api.delete(`todos`, { data: { ids } })
   },
 }
